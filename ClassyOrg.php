@@ -2,6 +2,7 @@
 
 require_once(__DIR__ . '/ClassyContent.php');
 require_once(__DIR__ . '/ClassyAPIClient.php');
+require_once(__DIR__ . '/widgets/ClassyOrg_CampaignActivityWidget.php');
 require_once(__DIR__ . '/widgets/ClassyOrg_CampaignProgressWidget.php');
 require_once(__DIR__ . '/widgets/ClassyOrg_CampaignOverviewWidget.php');
 require_once(__DIR__ . '/widgets/ClassyOrg_CampaignFundraiserLeadersWidget.php');
@@ -30,6 +31,7 @@ class ClassyOrg
         add_action('admin_init', array($this, 'settingsRegister'));
 
         // Short codes
+        add_shortcode('classy-campaign-activity', array($this, 'shortcodeCampaignActivity'));
         add_shortcode('classy-campaign-progress', array($this, 'shortcodeCampaignProgress'));
         add_shortcode('classy-campaign-overview', array($this, 'shortcodeCampaignOverview'));
         add_shortcode('classy-campaign-fundraiser-leaders', array($this, 'shortcodeCampaignFundraiserLeaders'));
@@ -44,6 +46,7 @@ class ClassyOrg
      */
     public function registerWidgets()
     {
+        register_widget('ClassyOrg_CampaignActivityWidget');
         register_widget('ClassyOrg_CampaignProgressWidget');
         register_widget('ClassyOrg_CampaignOverviewWidget');
         register_widget('ClassyOrg_CampaignFundraiserLeadersWidget');
@@ -106,6 +109,34 @@ class ClassyOrg
         echo '</td></tr></form>';
     }
 
+    /**
+     * Shortcode handler for generating a fundraiser (fundraising page) activity.
+     *
+     * @param $attributes
+     * @param $content
+     * @return null|string
+     */
+    public function shortcodeCampaignActivity($attributes, $content)
+    {
+        if (array_key_exists('id', $attributes))
+        {
+            self::addStylesheet();
+
+            $count = (array_key_exists('count', $attributes))
+                ? (int)$attributes['count']
+                : 5;
+            $classyContent = new ClassyContent();
+            $activity = $classyContent->campaignActivity($attributes['id'], $count);
+            $html = ClassyOrg_CampaignActivityWidget::render($activity, $attributes);;
+
+            return $html;
+
+        } else
+        {
+            // No campaign ID provided, ignore.
+            return null;
+        }
+    }
 
     /**
      * Shortcode handler for generating a fundraiser (fundraising page) leaderboard.

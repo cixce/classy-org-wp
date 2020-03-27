@@ -21,6 +21,33 @@ class ClassyContent
      * @param $campaignId
      * @return array|bool|mixed
      */
+    public function campaignActivity($campaignId)
+    {
+        $cacheKey = ClassyOrg::CACHE_KEY_PREFIX . '_CAMPAIGN_ACTIVITY_' . $campaignId;
+        $result = get_transient($cacheKey);
+        $result = false;
+        if ($result === false)
+        {
+            $params = array(
+                'sort'       => 'created_at:desc',
+            );
+            $activity = $this->apiClient->request(
+              '/campaigns/' . $campaignId . '/activity',
+              'GET',
+              $params
+            );
+            $result = json_decode($activity, true);
+            # set_transient($cacheKey, $result, $this->getExpiration());
+        }
+
+        return $result;
+    }
+
+    /**
+     * Fetch campaign overview from API
+     * @param $campaignId
+     * @return array|bool|mixed
+     */
     public function campaignOverview($campaignId)
     {
         $cacheKey = ClassyOrg::CACHE_KEY_PREFIX . '_CAMPAIGN_OVERVIEW_' . $campaignId;
