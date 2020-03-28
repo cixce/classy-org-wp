@@ -123,7 +123,7 @@ WIDGET_TEMPLATE;
         </div>
       </div>
       <div class="classy-org-activity_item-info">
-        <div class="classy-org-activity_item-info-label"><span class="classy-org-activity_item-info-name">%s<span> donated %s</div>
+        <div class="classy-org-activity_item-info-label"><span class="classy-org-activity_item-info-name">%s</span> donated %s</div>
         <div class="classy-org-activity_item-info-date" created="%s"'></div>
       </div>
     </div>
