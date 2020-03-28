@@ -34,6 +34,8 @@ class ClassyOrg
         add_shortcode('classy-campaign-activity', array($this, 'shortcodeCampaignActivity'));
         add_shortcode('classy-campaign-progress', array($this, 'shortcodeCampaignProgress'));
         add_shortcode('classy-campaign-overview', array($this, 'shortcodeCampaignOverview'));
+        add_shortcode('classy-campaign-donations', array($this, 'shortcodeCampaignDonations'));
+        add_shortcode('classy-campaign-supporters', array($this, 'shortcodeCampaignSupporters'));
         add_shortcode('classy-campaign-fundraiser-leaders', array($this, 'shortcodeCampaignFundraiserLeaders'));
         add_shortcode('classy-campaign-fundraising-teams-leaders', array($this, 'shortcodeCampaignFundraisingTeamLeaders'));
 
@@ -196,6 +198,45 @@ class ClassyOrg
             return null;
         }
     }
+
+    public function shortcodeCampaignDonations($attributes, $content)
+    {
+        if (array_key_exists('id', $attributes))
+        {
+            self::addStylesheet();
+
+            $classyContent = new ClassyContent();
+            $campaign = $classyContent->campaignOverview($attributes['id']);
+            $html = ClassyOrg_CampaignOverviewWidget::renderDonations($campaign, $attributes);
+
+            return $html;
+
+        } else
+        {
+            // No campaign ID provided, ignore
+            return null;
+        }
+    }
+
+    public function shortcodeCampaignSupporters($attributes, $content)
+    {
+        if (array_key_exists('id', $attributes))
+        {
+            self::addStylesheet();
+
+            $classyContent = new ClassyContent();
+            $campaign = $classyContent->campaignOverview($attributes['id']);
+            $html = ClassyOrg_CampaignOverviewWidget::renderSupporters($campaign, $attributes);
+
+            return $html;
+
+        } else
+        {
+            // No campaign ID provided, ignore
+            return null;
+        }
+    }
+
 
     /**
      * Shortcode handler for creating fundraising team leaderboards.

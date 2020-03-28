@@ -187,4 +187,61 @@ WIDGET_TEMPLATE;
 
         return $html;
     }
+
+    public static function renderSupporters($campaign, $params, $class = null)
+    {
+        $widgetTemplate = <<<WIDGET_TEMPLATE
+
+        <div class="classy-org-overview $class">
+          %s
+          <div class="classy-org-overview_item">
+            <span class="classy-org-overview_item-stat">%s</span>
+          </div>
+        </div>
+        <div style="clear: both;"></div>
+WIDGET_TEMPLATE;
+
+        $title = (!empty($params['title']))
+            ? sprintf('<h3 class="classy-org-overview_title">%s</h3>', esc_html($params['title']))
+            : '';
+
+        $donorCount = (int)$campaign['overview']['donors_count'];
+
+        $html = sprintf(
+            $widgetTemplate,
+            $title,
+            number_format($donorCount),
+        );
+
+        return $html;
+    }
+
+    public static function renderDonations($campaign, $params, $class = null)
+    {
+        $widgetTemplate = <<<WIDGET_TEMPLATE
+
+        <div class="classy-org-overview $class">
+          %s
+          <div class="classy-org-overview_item">
+            <span class="classy-org-overview_item-stat">$%s</span>
+          </div>
+        </div>
+        <div style="clear: both;"></div>
+
+WIDGET_TEMPLATE;
+
+        $title = (!empty($params['title']))
+            ? sprintf('<h3 class="classy-org-overview_title">%s</h3>', esc_html($params['title']))
+            : '';
+
+        $grossTransactions = ceil($campaign['overview']['total_gross_amount']);
+
+        $html = sprintf(
+            $widgetTemplate,
+            $title,
+            number_format($grossTransactions),
+        );
+
+        return $html;
+    }
 }
