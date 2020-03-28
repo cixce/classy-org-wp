@@ -116,17 +116,17 @@ class ClassyOrg_CampaignActivityWidget extends WP_Widget
 WIDGET_TEMPLATE;
 
         $itemTemplate = <<<ITEM_TEMPLATE
-
     <div class="classy-org-activity_item">
-      <div class="classy-org-activity_item-image">%s</div>
+      <div class="classy-org-activity_item-image-wrapper">
+        <div class="classy-org-activity_item-image-text">%s</div>
+        <div class="classy-org-activity_item-image">
+        </div>
+      </div>
       <div class="classy-org-activity_item-info">
-        <span class="classy-org-activity_item-info-name">%s</span>
-        donated
-        <span class="classy-org-activity_item-info-amount">%s</span>
-        <span class="classy-org-activity_item-info-date" created="%s"'></span>
+        <div class="classy-org-activity_item-info-label"><span class="classy-org-activity_item-info-name">%s<span> donated %s</div>
+        <div class="classy-org-activity_item-info-date" created="%s"'></div>
       </div>
     </div>
-
 ITEM_TEMPLATE;
 
         $logoTemplate = '<img src="%s" />';

@@ -61,8 +61,8 @@
 }
 .classy-org-activity_item
 {
-    margin-bottom: 10px;
-    overflow: hidden;
+  margin-bottom: 10px;
+  overflow: hidden;
 }
 
 .classy-org-activity_item-info
@@ -70,40 +70,37 @@
     margin-left: 10px;
 }
 
+.classy-org-activity_item-image-wrapper {
+  display: inline-block;
+  position: relative;
+  width: 45px;
+  height: 45px;
+}
+
+.classy-org-activity_item-image {
+  display: block;
+  border: 22.5px solid blue;
+  border-radius: 22.5px;
+}
+
+.classy-org-activity_item-image-text {
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  font-size: 20px;
+  color: white;
+  transform: translate(-50%, -50%);
+}
 .classy-org-activity_item-info, .classy-org-activity_item-image
 {
     display: inline-block;
     vertical-align: middle;
 }
 
-.classy-org-activity_item-image
+.classy-org-activity_item-info-label, .classy-org-activity_item-info-date
 {
-    background-color: #fff;
-    display: table;
-    float: left;
-    overflow: hidden;
-}
-
-.classy-org-activity_item-image i,img
-{
-    display: table-cell;
-    vertical-align: middle;
-}
-
-.classy-org-activity_item-image i
-{
-    background-color: #303030;
-}
-
-.classy-org-activity_item-info-name
-{
-    display: inline-block;
-}
-
-.classy-org-activity_item-info-amount
-{
-    color: #909090;
-    display: inline-block;
+    display: block;
 }
 
 /* Leaderboards */
