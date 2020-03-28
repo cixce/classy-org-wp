@@ -123,6 +123,7 @@ WIDGET_TEMPLATE;
         <span class="classy-org-activity_item-info-name">%s</span>
         donated
         <span class="classy-org-activity_item-info-amount">%s</span>
+        <span class="classy-org-activity_item-info-date" created="%s"'></span>
       </div>
     </div>
 
@@ -142,12 +143,13 @@ ITEM_TEMPLATE;
         {
           $name = $a['transaction']['member_name'];
           $amount = $a['link_text'];
-          // $time = empty($a['created_at']);
+          $created = $a['created_at'];
           $itemsHtml .= sprintf(
               $itemTemplate,
               strtoupper(substr($name, 0, 1)),
               esc_html($name),
-              esc_html($amount)
+              esc_html($amount),
+              esc_html($created)
           );
         }
         $html = sprintf($widgetTemplate, $title, $itemsHtml);

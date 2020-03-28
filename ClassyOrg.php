@@ -257,6 +257,10 @@ class ClassyOrg
     public static function addStylesheet()
     {
         $file = plugin_dir_url(__FILE__) . '/css/classy_org.css/';
+
+        wp_register_script('classy', plugins_url('js/classy_org.js', __FILE__), null, null, true );
+        wp_enqueue_script('classy');
+
         wp_enqueue_style('classy_org', plugins_url('css/classy_org.css', __FILE__), array(), time());
         wp_enqueue_style('classy_org_icon_fonts', plugins_url('css/font-awesome.min.css', __FILE__), array(), time());
     }
