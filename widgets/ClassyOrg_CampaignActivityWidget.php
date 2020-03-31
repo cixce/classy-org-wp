@@ -139,7 +139,7 @@ ITEM_TEMPLATE;
             $title = '';
         }
         $data = $activity['data'];
-        foreach ($data as $a)
+        foreach (array_slice($data, 0, 7) as $a)
         {
           $name = $a['transaction']['member_name'];
           $amount = $a['link_text'];
