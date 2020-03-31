@@ -3,7 +3,6 @@ import en from 'javascript-time-ago/locale/en'
 
 (function( ) {
   'use strict';
-  console.log('Classsy classy sassy');
   window.addEventListener('load', () => {
     TimeAgo.addLocale(en)
     const timeAgo = new TimeAgo('en-US')
@@ -11,7 +10,7 @@ import en from 'javascript-time-ago/locale/en'
     for(let idx = 0; idx < items.length; ++idx) {
       const i = items[idx];
       try {
-        const created = new Date(i.getAttribute('created'));
+        const created = new Date(parseInt(i.getAttribute('created'), 10));
         i.innerText = timeAgo.format(created);
       } catch (e) {
         console.log(e);

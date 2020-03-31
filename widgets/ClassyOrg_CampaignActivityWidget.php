@@ -143,7 +143,8 @@ ITEM_TEMPLATE;
         {
           $name = $a['transaction']['member_name'];
           $amount = $a['link_text'];
-          $created = $a['created_at'];
+          $created = date("U",strtotime($a['created_at'])) . '000';
+
           $itemsHtml .= sprintf(
               $itemTemplate,
               strtoupper(substr($name, 0, 1)),

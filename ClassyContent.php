@@ -7,7 +7,7 @@
  */
 class ClassyContent
 {
-    const EXPIRATION_IN_MINUTES = 10;
+    const EXPIRATION_IN_MINUTES = 5;
 
     private $apiClient;
 
@@ -25,7 +25,6 @@ class ClassyContent
     {
         $cacheKey = ClassyOrg::CACHE_KEY_PREFIX . '_CAMPAIGN_ACTIVITY_' . $campaignId;
         $result = get_transient($cacheKey);
-        $result = false;
         if ($result === false)
         {
             $params = array(
@@ -37,7 +36,7 @@ class ClassyContent
               $params
             );
             $result = json_decode($activity, true);
-            # set_transient($cacheKey, $result, $this->getExpiration());
+            set_transient($cacheKey, $result, $this->getExpiration());
         }
 
         return $result;
