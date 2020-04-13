@@ -207,7 +207,14 @@ class ClassyOrg
 
             $classyContent = new ClassyContent();
             $campaign = $classyContent->campaignOverview($attributes['id']);
-            $html = ClassyOrg_CampaignOverviewWidget::renderDonations($campaign, $attributes);
+            if($attributes['id2']) {
+              $campaign2 = $classyContent->campaignOverview($attributes['id2']);
+            }
+            $html = ClassyOrg_CampaignOverviewWidget::renderDonations(
+              $campaign,
+              $campaign2,
+              $attributes
+            );
 
             return $html;
 
@@ -226,7 +233,12 @@ class ClassyOrg
 
             $classyContent = new ClassyContent();
             $campaign = $classyContent->campaignOverview($attributes['id']);
-            $html = ClassyOrg_CampaignOverviewWidget::renderSupporters($campaign, $attributes);
+            if($attributes['id2']) {
+              $campaign2 = $classyContent->campaignOverview($attributes['id2']);
+            }
+            $html = ClassyOrg_CampaignOverviewWidget::renderSupporters($campaign,
+              $campaign2,
+              $attributes);
 
             return $html;
 

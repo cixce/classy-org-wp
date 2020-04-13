@@ -188,7 +188,7 @@ WIDGET_TEMPLATE;
         return $html;
     }
 
-    public static function renderSupporters($campaign, $params, $class = null)
+    public static function renderSupporters($campaign, $campaign2, $params, $class = null)
     {
         $widgetTemplate = <<<WIDGET_TEMPLATE
 
@@ -206,7 +206,9 @@ WIDGET_TEMPLATE;
             : '';
 
         $donorCount = (int)$campaign['overview']['donors_count'];
-
+        if($campaign2) {
+          $donorCount += ceil($campaign2['overview']['donors_count']);
+        }
         $html = sprintf(
             $widgetTemplate,
             $title,
@@ -216,7 +218,7 @@ WIDGET_TEMPLATE;
         return $html;
     }
 
-    public static function renderDonations($campaign, $params, $class = null)
+    public static function renderDonations($campaign, $campaign2, $params, $class = null)
     {
         $widgetTemplate = <<<WIDGET_TEMPLATE
 
@@ -235,6 +237,9 @@ WIDGET_TEMPLATE;
             : '';
 
         $grossTransactions = ceil($campaign['overview']['total_gross_amount']);
+        if($campaign2) {
+          $grossTransactions += ceil($campaign2['overview']['total_gross_amount']);
+        }
 
         $html = sprintf(
             $widgetTemplate,
